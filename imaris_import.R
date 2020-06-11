@@ -42,7 +42,11 @@ for (currentsheet in sheetnames[str_detect(sheetnames, regex("shortest", ignore_
   surface_current = as.numeric(str_extract(temp_data$Surfaces[1],"\\d+"))
   surfaces_other = as.numeric(str_extract(temp_data$`Surpass Object`, "\\d+"))
   distances = temp_data$`Shortest Distance to Surfaces`
+  
+  #break up the distance list and instert a NaN with the distance to it self
   distances = c(distances[surfaces_other < surface_current], NaN, distances[surfaces_other > surface_current])
+  
+  #insert the new distance into the dataframe at the correct location
   ShortestDistance[surfaces_all == surface_current] = distances
   
 
